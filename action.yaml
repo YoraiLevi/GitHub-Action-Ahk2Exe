@@ -34,22 +34,17 @@ runs:
         $ErrorActionPreference = 'Stop'
         Resolve-Path '${{inputs.in}}'
         Write-Host "Generating exe"
-        Get-Command ahk2exe
-        tree C:\Users\runneradmin\scoop\shims\ /F
-        tree C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler /F
         if (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
-          ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /icon '${{inputs.icon}}' /silent
+          ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /icon '${{inputs.icon}}' /silent | write-output
         } elseif (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '')) {
-          ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /silent
+          ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /silent | write-output
         } elseif (('${{inputs.in}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
-          ahk2exe /in '${{inputs.in}}' /icon '${{inputs.icon}}' /silent
+          ahk2exe /in '${{inputs.in}}' /icon '${{inputs.icon}}' /silent | write-output
         } elseif ('${{inputs.in}}' -ne '') {
-          ahk2exe /in (Resolve-Path '${{inputs.in}}').Path /silent
+          ahk2exe /in (Resolve-Path '${{inputs.in}}').Path /silent | write-output
         } else {
           throw 'There are no required parameters'
         }
-        tree \ /F
-        Resolve-Path '${{inputs.in}}'.replace('.ahk','.exe')
 branding:
   color: green
   icon: terminal
