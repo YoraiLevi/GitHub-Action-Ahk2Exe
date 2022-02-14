@@ -33,11 +33,10 @@ runs:
     - name: Install AutoHotkey
       shell: powershell
       run: scoop install autohotkey
-    - run: tree /F
-      shell: powershell
     - name: Ahk2Exe
       shell: powershell
       run: |
+        $ErrorActionPreference = 'Stop'
         Resolve-Path '${{inputs.in}}'
         if (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
           ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /icon '${{inputs.icon}}'
@@ -50,8 +49,7 @@ runs:
         } else {
           throw 'There are no required parameters'
         }
-    - run: tree /F
-      shell: powershell
+        Resolve-Path '${{inputs.in}}'.replace('.ahk','.exe')
 branding:
   color: green
   icon: terminal
