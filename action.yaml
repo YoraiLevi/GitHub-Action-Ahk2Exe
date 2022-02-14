@@ -38,6 +38,7 @@ runs:
     - name: Ahk2Exe
       shell: powershell
       run: |
+        Resolve-Path '${{inputs.in}}'
         if (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
           ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /icon '${{inputs.icon}}'
         } elseif (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '')) {
