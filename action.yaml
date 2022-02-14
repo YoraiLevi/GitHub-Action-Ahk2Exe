@@ -38,6 +38,10 @@ runs:
       run: |
         $ErrorActionPreference = 'Stop'
         Resolve-Path '${{inputs.in}}'
+        Write-Host "Generating exe"
+        Get-Command ahk2exe
+        tree C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler\ /F
+        
         if (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
           ahk2exe /in '${{inputs.in}}' /out '${{inputs.out}}' /icon '${{inputs.icon}}' /silent
         } elseif (('${{inputs.in}}' -ne '') -and ('${{inputs.out}}' -ne '')) {
@@ -45,8 +49,6 @@ runs:
         } elseif (('${{inputs.in}}' -ne '') -and ('${{inputs.icon}}' -ne '')) {
           ahk2exe /in '${{inputs.in}}' /icon '${{inputs.icon}}' /silent
         } elseif ('${{inputs.in}}' -ne '') {
-          Write-Host "Generating exe"
-          Get-Command ahk2exe
           ahk2exe /in (Resolve-Path '${{inputs.in}}').Path /silent
         } else {
           throw 'There are no required parameters'
