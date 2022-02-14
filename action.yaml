@@ -26,7 +26,7 @@ runs:
 
     - name: Add to environment variables
       shell: powershell
-      run: Write-Output ('Path=' + $Env:SystemDrive + '\Windows\System32' + ';' + $ENV:ProgramFiles + '\AutoHotkey\Compiler') >> $Env:GITHUB_ENV
+      run: Write-Output ('Path=' + $Env:PATH + ';' + $Env:SystemDrive + '\Windows\System32' + ';' + $ENV:ProgramFiles + '\AutoHotkey\Compiler') >> $Env:GITHUB_ENV
 
     - name: Ahk2Exe
       shell: powershell
