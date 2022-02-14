@@ -18,21 +18,19 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install Scoop
-      shell: powershell
-      run: |
-        try{get-command scoop -ErrorAction Stop}catch{
-        iwr -useb get.scoop.sh | iex
-        scoop bucket add extras
-        }
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install autohotkey -y
+
 
     - name: Add to environment variables
       shell: powershell
-      run: Write-Output ('Path=' + $Env:SystemDrive + '\Windows\System32' + ';' + $Env:UserProfile + '\scoop\shims') >> $Env:GITHUB_ENV
+      run: Write-Output ('Path=' + $Env:SystemDrive + '\Windows\System32' + ';' + $ENV:ProgramFiles + '\AutoHotkey\Compiler') >> $Env:GITHUB_ENV
 
     - name: Install AutoHotkey
       shell: powershell
-      run: scoop install autohotkey
+      run: choco install autohotkey
     - name: Ahk2Exe
       shell: powershell
       run: |
