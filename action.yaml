@@ -34,6 +34,7 @@ runs:
       shell: powershell
       run: scoop install autohotkey
     - run: tree /F
+      shell: powershell
     - name: Ahk2Exe
       shell: powershell
       run: |
@@ -49,6 +50,7 @@ runs:
           throw 'There are no required parameters'
         }
     - run: tree /F
+      shell: powershell
 branding:
   color: green
   icon: terminal
