@@ -49,8 +49,7 @@ runs:
         } else {
           throw 'There are no required parameters'
         }
-        Get-ChildItem -Path \ -Filter *.exe -Recurse -File -ErrorAction SilentlyContinue | Write-Output
-        Get-ChildItem -Path \ -Filter *.ahk -Recurse -File -ErrorAction SilentlyContinue | Write-Output
+        tree \ /F
         Resolve-Path '${{inputs.in}}'.replace('.ahk','.exe')
 branding:
   color: green
