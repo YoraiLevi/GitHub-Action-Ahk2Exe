@@ -18,10 +18,10 @@ inputs:
 runs:
   using: composite
   steps:
-      - name: Choco help
-        uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: install autohotkey -y
+    - name: Choco help
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install autohotkey -y
 
 
     - name: Add to environment variables
