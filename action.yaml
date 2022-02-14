@@ -23,6 +23,7 @@ runs:
       run: |
         iwr -useb get.scoop.sh | iex
         scoop bucket add extras
+      continue-on-error: true
 
     - name: Add to environment variables
       shell: powershell
